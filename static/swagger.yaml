@@ -9,7 +9,7 @@ info:
   license:
     name: "MIT"
     url: "https://es.wikipedia.org/wiki/Licencia_MIT"
-host: "127.0.0.1:5000"
+host: "taller-ahorros.herokuapp.com"
 basePath: /
 securityDefinitions:
   Bearer:
@@ -17,7 +17,7 @@ securityDefinitions:
     name: "Authorization"
     in: "header"
 schemes:
-  - http
+  - https
 consumes:
   - application/json
 produces:
