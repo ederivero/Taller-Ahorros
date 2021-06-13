@@ -133,3 +133,6 @@ entorno_ahorros/
 
 # .vscode
 .vscode/
+
+# sqlite
+test.db

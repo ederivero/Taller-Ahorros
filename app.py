@@ -12,6 +12,7 @@ from controllers.usuario import (
 from controllers.movimiento import MovimientosController
 from utils.jwt_config import autenticador, identificador, manejo_error_JWT
 import pathlib
+import sqlite3
 
 load_dotenv()
 
@@ -27,12 +28,14 @@ swagger_blueprint = get_swaggerui_blueprint(
 )
 app = Flask(__name__)
 CORS(app)
+
 app.register_blueprint(swagger_blueprint)
-if environ.get('DATABASE_URI'):
+if bool(int(environ.get('PRODUCTION'))):
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URI')
 else:
     DB_ROUTE = path.join(
         pathlib.Path(__file__).parent.absolute(), 'db', 'test.db')
+    sqlite3.connect(DB_ROUTE).close()
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////{}'.format(DB_ROUTE)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
