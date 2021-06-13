@@ -35,7 +35,6 @@ else:
         pathlib.Path(__file__).parent.absolute(), 'db', 'test.db')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////{}'.format(DB_ROUTE)
 
-print(app.config['SQLALCHEMY_DATABASE_URI'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = environ.get("JWT_SECRET")
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)

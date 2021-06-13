@@ -69,13 +69,11 @@ class MovimientosController(Resource):
     @jwt_required()
     def get(self):
         usuario: UsuarioModel = current_identity
-        print('aver')
         transactions = db.session.query(MovimientoModel).filter_by(
             usuario=usuario.usuarioId).order_by(MovimientoModel.movimientoFecha.desc()).all()
         data = []
         for transaction in transactions:
             data.append(transaction.json())
-        print(usuario.usuarioId)
         return {
             "success": True,
             "content": data,
