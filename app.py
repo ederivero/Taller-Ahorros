@@ -16,8 +16,6 @@ import pathlib
 load_dotenv()
 
 
-DB_ROUTE = environ.get('DATABASE_URI') if environ.get('PRODUCCION') else path.join(
-    pathlib.Path(__file__).parent.absolute(), 'db', 'test.db')
 SWAGGER_URL = "/api/docs"
 API_URL = "/static/swagger.json"
 swagger_blueprint = get_swaggerui_blueprint(
@@ -27,10 +25,17 @@ swagger_blueprint = get_swaggerui_blueprint(
         'app_name': "Ahorros Flask - Swagger Documentation"
     }
 )
-
 app = Flask(__name__)
 CORS(app)
 app.register_blueprint(swagger_blueprint)
+if environ.get('DATABASE_URI'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URI')
+else:
+    DB_ROUTE = path.join(
+        pathlib.Path(__file__).parent.absolute(), 'db', 'test.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////{}'.format(DB_ROUTE)
+
+print(app.config['SQLALCHEMY_DATABASE_URI'])
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////{}'.format(DB_ROUTE)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = environ.get("JWT_SECRET")
