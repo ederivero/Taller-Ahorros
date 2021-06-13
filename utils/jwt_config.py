@@ -56,3 +56,27 @@ def identificador(payload):
     else:
         # en mi payload no hay la llave identity
         return None
+
+
+# funcion para personalizar el mensaje de error de mi libreria de JWT
+def manejo_error_JWT(error):
+    respuesta = {
+        "success": False,
+        "content": None,
+        "message": None
+    }
+    if error.error == 'Authorization Required':
+        respuesta["message"] = "Se necesita una token para esta peticion"
+    elif error.error == 'Bad Request':
+        respuesta["message"] = "Credenciales invalidas"
+    elif error.description == "Signature has expired":
+        respuesta["message"] = "Token ya expiro"
+    elif error.description == "Signature verification failed":
+        respuesta["message"] = "Token invalida"
+    elif error.description == "Unsupported authorization type":
+        respuesta["message"] = "Debe de mandar la token con el prefijo Bearer"
+    else:
+        respuesta["message"] = "Error desconocido"
+
+    return respuesta, error.status_code
+    # 401 => unauthorized => no autorizado

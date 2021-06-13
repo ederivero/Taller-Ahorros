@@ -1,0 +1,230 @@
+swagger: "2.0"
+info:
+  description: "Documentacion del taller de Ahorros de CodiGo"
+  version: "1.0"
+  title: Taller de Ahorros
+  contact:
+    email: ederiveroman@gmail.com
+    name: "Eduardo de Rivero"
+  license:
+    name: "MIT"
+    url: "https://es.wikipedia.org/wiki/Licencia_MIT"
+host: "127.0.0.1:5000"
+basePath: /
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /register:
+    post:
+      summary: /register
+      tags:
+        - Usuario
+      operationId: /register
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ""
+          schema:
+            $ref: "#/definitions/~1registerrequest"
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /login:
+    post:
+      summary: /login
+      tags:
+        - Usuario
+      operationId: /login
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ""
+          schema:
+            $ref: "#/definitions/~1loginrequest"
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /olvide-password:
+    post:
+      summary: /olvide-password
+      tags:
+        - Usuario
+      operationId: /olvide-password
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ""
+          schema:
+            $ref: "#/definitions/~1olvide-password-request"
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /reset-password:
+    post:
+      description: Metodo para resetear la contraseña
+      summary: /reset-password
+      tags:
+        - Usuario
+      operationId: /reset-password
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ""
+          schema:
+            $ref: "#/definitions/~1reset-password-request"
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /transactions:
+    post:
+      summary: /movimientos
+      tags:
+        - Movimiento
+      operationId: /movimientos
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ""
+          schema:
+            $ref: "#/definitions/~1movimientosrequest"
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      security:
+        - Bearer: []
+    get:
+      summary: /movimientos
+      tags:
+        - Movimiento
+      operationId: Get/movimientos
+      deprecated: false
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      security:
+        - Bearer: []
+definitions:
+  /registerrequest:
+    title: /registerrequest
+    example:
+      nombre: Nombre
+      apellido: Apellido
+      correo: correo@correo.com
+      password: Aabc123!
+    type: object
+    properties:
+      nombre:
+        type: string
+      apellido:
+        type: string
+      correo:
+        type: string
+      password:
+        type: string
+    required:
+      - nombre
+      - apellido
+      - correo
+      - password
+  /loginrequest:
+    title: /loginrequest
+    example:
+      email: correo@correo.com
+      password: Aabc123!
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+  /olvide-password-request:
+    title: /olvide-password-request
+    example:
+      correo: correo@correo.com
+    type: object
+    properties:
+      correo:
+        type: string
+    required:
+      - correo
+  /reset-password-request:
+    title: /reset-password-request
+    example:
+      correo: correo@correo.com
+      new_password: Aabc123!
+    type: object
+    properties:
+      correo:
+        type: string
+      new_password:
+        type: string
+    required:
+      - correo
+      - new_password
+  /movimientosrequest:
+    title: /movimientosrequest
+    example:
+      nombre: Movimiento1
+      monto: 999.99
+      tipo: egreso
+      fecha: "2021-01-01"
+    type: object
+    properties:
+      nombre:
+        type: string
+      monto:
+        type: number
+        format: double
+      tipo:
+        type: string
+      fecha:
+        type: string
+    required:
+      - nombre
+      - monto
+      - tipo
+      - fecha
+tags:
+  - name: Usuario
+  - name: Movimiento
