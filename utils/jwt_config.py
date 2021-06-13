@@ -65,6 +65,7 @@ def manejo_error_JWT(error):
         "content": None,
         "message": None
     }
+    print(error)
     if error.error == 'Authorization Required':
         respuesta["message"] = "Se necesita una token para esta peticion"
     elif error.error == 'Bad Request':
