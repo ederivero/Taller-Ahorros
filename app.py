@@ -19,12 +19,12 @@ load_dotenv()
 DB_ROUTE = environ.get('DATABASE_URI') if environ.get('PRODUCCION') else path.join(
     pathlib.Path(__file__).parent.absolute(), 'db', 'test.db')
 SWAGGER_URL = "/api/docs"
-API_URL = "/static/swagger.json"  # indicar la ubicacion del archivo json
+API_URL = "/static/swagger.json"
 swagger_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
     config={
-        'app_name': "Reposteria Flask - Swagger Documentation"
+        'app_name': "Ahorros Flask - Swagger Documentation"
     }
 )
 
