@@ -1,0 +1,35 @@
+body {
+  background-color: #333745;
+}
+* {
+  color: #fe5f55;
+}
+a {
+  color: #e63462;
+}
+.index {
+  height: 100vh;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttons {
+  height: 50%;
+}
+.swagger {
+  outline: none;
+  border: 0;
+  background-image: url("swagger.png");
+  background-size: 225px 225px;
+  width: 225px;
+  height: 225px;
+}
+
+.react {
+  background-image: url("react.png");
+  background-size: 225px 225px;
+  width: 225px;
+  height: 225px;
+}
