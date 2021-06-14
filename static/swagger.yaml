@@ -141,7 +141,42 @@ paths:
           headers: {}
       security:
         - Bearer: []
+  /balance:
+    post:
+      tags:
+        - Movimiento
+      operationId: /balances
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ""
+          schema:
+            $ref: "#/definitions/~1balancesrequest"
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      security:
+        - Bearer: []
 definitions:
+  /balancesrequest:
+    title: /balancerequest
+    example:
+      fecha_inicio: "2021-01-01"
+      fecha_fin: "2021-12-31"
+    type: object
+    properties:
+      fecha_inicio:
+        type: string
+      fecha_fin:
+        type: string
+    required:
+      - fecha_inicio
+      - fecha_fin
   /registerrequest:
     title: /registerrequest
     example:

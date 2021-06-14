@@ -35,6 +35,7 @@ def identificador(payload):
 
 # funcion para personalizar el mensaje de error de mi libreria de JWT
 def manejo_error_JWT(error):
+    print(error)
     respuesta = {
         "success": False,
         "content": None,

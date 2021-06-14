@@ -79,3 +79,45 @@ class MovimientosController(Resource):
             "content": data,
             "message": None
         }
+
+
+class BalanceController(Resource):
+    @jwt_required()
+    def post(self):
+        serializer = reqparse.RequestParser(bundle_errors=True)
+        serializer.add_argument(
+            'fecha_inicio',
+            type=str,
+            required=True,
+            help='Falta la fecha_inicio',
+            location='json'
+        )
+        serializer.add_argument(
+            'fecha_fin',
+            type=str,
+            required=True,
+            help='Falta la fecha_fin',
+            location='json'
+        )
+        data = serializer.parse_args()
+        usuario: UsuarioModel = current_identity
+        movimientos: list[MovimientoModel] = db.session.query(
+            MovimientoModel).filter(MovimientoModel.usuario == usuario.usuarioId, MovimientoModel.movimientoFecha.between(
+                data.get('fecha_inicio'), data.get('fecha_fin'))).all()
+        ingresos = 0.0
+        egresos = 0.0
+        for movimiento in movimientos:
+            print("Fue un {} del {} y fue en total: {}".format(
+                movimiento.movimientoTipo, movimiento.movimientoFecha, movimiento.movimientoMonto))
+            if movimiento.movimientoTipo == "egreso":
+                egresos += movimiento.movimientoMonto
+            elif movimiento.movimientoTipo == "ingreso":
+                ingresos += movimiento.movimientoMonto
+        return {
+            "success": True,
+            "content": {
+                "ingresos": ingresos,
+                "egresos": egresos
+            },
+            "message": None
+        }

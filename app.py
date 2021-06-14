@@ -9,7 +9,7 @@ from os import path, environ
 from datetime import timedelta
 from controllers.usuario import (
     RegistroController, ResetPasswordController, ForgotPasswordController)
-from controllers.movimiento import MovimientosController
+from controllers.movimiento import BalanceController, MovimientosController
 from utils.jwt_config import autenticador, identificador, manejo_error_JWT
 import pathlib
 import sqlite3
@@ -42,7 +42,7 @@ else:
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////{}'.format(
             DB_ROUTE)
-
+print(environ.get("JWT_SECRET"))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = environ.get("JWT_SECRET")
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)
@@ -61,6 +61,7 @@ api.add_resource(RegistroController, '/register')
 api.add_resource(ResetPasswordController, '/reset-password')
 api.add_resource(ForgotPasswordController, '/forgot-password')
 api.add_resource(MovimientosController, '/transactions')
+api.add_resource(BalanceController, '/balance')
 
 
 @app.route('/', methods=['GET'])
