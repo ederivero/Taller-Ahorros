@@ -63,12 +63,12 @@ paths:
         "200":
           description: ""
           headers: {}
-  /olvide-password:
+  /forgot-password:
     post:
-      summary: /olvide-password
+      summary: /forgot-password
       tags:
         - Usuario
-      operationId: /olvide-password
+      operationId: /forgot-password
       deprecated: false
       produces:
         - application/json
