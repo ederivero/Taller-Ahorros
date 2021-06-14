@@ -49,6 +49,19 @@ Sin importar el metodo que escogas ya deberas tener el repositorio en tu maquina
 
 Una vez descargado el repositorio, ahora, crea un entorno virtual para que solamente las librerias que vayamos a usar en este proyecto sean locales y no interfieran con el funcionamiento global de [Python](https://www.python.org/) de la siguiente forma:
 
+- En Windows
+
+  ```
+  $ python -m venv entorno_talle
+  ```
+
+- En Mac / Linux
+
+  ```
+  $ python3 -m venv entorno_talle
+  ```
+
+## Paso 4<a name = "paso4"></a>
 Ejecuta el siguiente comando:
 
 ```
@@ -59,20 +72,20 @@ Que es lo que hace este comando?
 
     Dentro del proyecto hay un archivo llamado _requirements_dev.txt_ es ahi donde estan declaradas todas las librerias que necesitamos para que el proyecto funcione exitosamente con sus respectivas versiones.
 
-## Paso 4<a name = "paso4"></a>
+## Paso 5<a name = "paso5"></a>
 
 Luego procederemos a levantar el proyecto 🚀
 
 - En Windows
 
   ```
-  $ python --version
+  $ python app.py
   ```
 
 - En Mac / Linux
 
   ```
-  $ python3 --version
+  $ python3 app.py
   ```
 
 Ya estámos! Ya podemos levantar nuestro proyecto, no necesitas preocuparte de las bases de datos 🗄️ ya que estamos usando [SQLITE](https://www.sqlite.org/index.html) que es una base de datos muy ligera.
