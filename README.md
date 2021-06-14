@@ -52,16 +52,33 @@ Una vez descargado el repositorio, ahora, crea un entorno virtual para que solam
 - En Windows
 
   ```
-  $ python -m venv entorno_talle
+  $ python -m venv entorno_taller
   ```
 
 - En Mac / Linux
 
   ```
-  $ python3 -m venv entorno_talle
+  $ python3 -m venv entorno_taller
   ```
 
 ## Paso 4<a name = "paso4"></a>
+
+Una vez creado el entorno virtual, ahora procederemos a activarlo de la siguiente manera
+
+- En Windows
+
+  ```
+  $ entorno_taller/Scripts/activate
+  ```
+
+- En Mac / Linux
+
+  ```
+  $ source entorno_taller/bin/activate
+  ```
+
+## Paso 4<a name = "paso4"></a>
+
 Ejecuta el siguiente comando:
 
 ```
