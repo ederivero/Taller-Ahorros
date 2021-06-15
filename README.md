@@ -17,6 +17,7 @@ Para comenzar es muy sencillo solamente sigue los siguientes pasos de instalaci�
   - [Paso 4](#paso4)
   - [Paso 5](#paso5)
   - [Paso 6](#paso6)
+  - [Paso 7](#paso7)
 - [Extras](#extras)
 - [Licencia](#licencia)
 
@@ -83,7 +84,7 @@ Una vez creado el entorno virtual, ahora procederemos a activarlo de la siguient
   $ source entorno_taller/bin/activate
   ```
 
-## Paso 4<a name = "paso4"></a>
+## Paso 5<a name = "paso5"></a>
 
 Ejecuta el siguiente comando:
 
@@ -95,13 +96,13 @@ Que es lo que hace este comando?
 
 - Dentro del proyecto hay un archivo llamado `requirements_dev.txt` es ahi donde estan declaradas todas las librerias que necesitamos para que el proyecto funcione exitosamente con sus respectivas versiones.
 
-## Paso 5<a name = "paso5"></a>
+## Paso 6<a name = "paso6"></a>
 
 Ahora tendremos que crear el archivo `.env` y copiar todo el contenido del archivo `.env.example` ya que ahi se ubican las variables de entorno de nuestro proyecto
 
 - Nota: si quieres pasar a [MySQL](https://www.mysql.com/) entonces deberas definir tu conección en la variable `DATABASE_URI`
 
-## Paso 6<a name = "paso6"></a>
+## Paso 7<a name = "paso7"></a>
 
 Luego procederemos a levantar el proyecto 🚀
 
