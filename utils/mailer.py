@@ -34,6 +34,6 @@ def enviarCorreo(destinatario, nombre, link):
         )
         servidorSMTP.quit()
         return True
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        print(error)
         return False

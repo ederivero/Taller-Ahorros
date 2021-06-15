@@ -58,8 +58,8 @@ class MovimientosController(Resource):
                 "message": "Movimiento registrado exitosamente",
                 "content": nuevoMovimiento.json(),
             }
-        except Exception as e:
-            print(e)
+        except Exception as error:
+            print(error)
             return {
                 "success": False,
                 "message": "Formato de fecha incorrecto, el formato es YYYY-MM-DD",
@@ -107,8 +107,6 @@ class BalanceController(Resource):
         ingresos = 0.0
         egresos = 0.0
         for movimiento in movimientos:
-            print("Fue un {} del {} y fue en total: {}".format(
-                movimiento.movimientoTipo, movimiento.movimientoFecha, movimiento.movimientoMonto))
             if movimiento.movimientoTipo == "egreso":
                 egresos += movimiento.movimientoMonto
             elif movimiento.movimientoTipo == "ingreso":

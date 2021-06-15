@@ -44,7 +44,7 @@ else:
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////{}'.format(
             DB_ROUTE)
-print(environ.get("JWT_SECRET"))
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = environ.get("JWT_SECRET")
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)
@@ -84,8 +84,8 @@ def recuperar_password(token):
         else:
             return render_template('bad_token.jinja')
 
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        print(error)
         return render_template('bad_token.jinja')
 
 
