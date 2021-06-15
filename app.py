@@ -1,19 +1,21 @@
-from flask import Flask, request, render_template
+import pathlib
+import sqlite3
+import platform
+import json
+from flask import Flask, render_template
 from flask_restful import Api
 from flask_jwt import JWT
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 from dotenv import load_dotenv
-from db.db import db
+from datetime import datetime, timedelta
+from cryptography.fernet import Fernet
 from os import path, environ
-from datetime import timedelta
+from db.db import db
 from controllers.usuario import (
     RegistroController, ResetPasswordController, ForgotPasswordController)
 from controllers.movimiento import BalanceController, MovimientosController
 from utils.jwt_config import autenticador, identificador, manejo_error_JWT
-import pathlib
-import sqlite3
-import platform
 
 load_dotenv()
 
@@ -62,6 +64,29 @@ api.add_resource(ResetPasswordController, '/reset-password')
 api.add_resource(ForgotPasswordController, '/forgot-password')
 api.add_resource(MovimientosController, '/transactions')
 api.add_resource(BalanceController, '/balance')
+
+
+@app.route("/recuperarPassword/<string:token>")
+def recuperar_password(token):
+
+    fernet = Fernet(environ.get("FERNET_SECRET"))
+    # decrypt(b'token')
+    # el metodo decrypt recibe una token pero en formato de bytes y luego si es que cumple con la contraseña devolvera el mensaje encriptado pero en bytes, y para convertirlo a string usarmos el metodo decode
+    try:
+        respuesta = fernet.decrypt(bytes(token, 'utf-8')).decode('utf-8')
+        # el metodo loads convierte un json a un diccionario
+        respuesta_diccionario = json.loads(respuesta)
+        fecha_caducidad = datetime.strptime(
+            respuesta_diccionario['fecha_caducidad'], '%Y-%m-%d %H:%M:%S.%f')
+        # si la fecha de caducidad es mayor que la hora actual, aun se podra realizar el cambio de contraseña, caso contrario, indicar que la token ya vencio
+        if fecha_caducidad > datetime.now():
+            return render_template('recovery_password.jinja', correo=respuesta_diccionario['correo'])
+        else:
+            return render_template('bad_token.jinja')
+
+    except Exception as e:
+        print(e)
+        return render_template('bad_token.jinja')
 
 
 @app.route('/', methods=['GET'])
